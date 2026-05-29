@@ -360,7 +360,22 @@ public static int lca(Node node, int d1,int d2)
    return res;
 }
 
+public static int distanceBetweenNodes(Node node , int d1,int d2)
+{
+   ArrayList<Integer> ntrp1 = NodeToRootPath(node,d1);
+   ArrayList<Integer> ntrp2 = NodeToRootPath(node,d2);
+  int i = ntrp1.size()-1;
+  int j = ntrp2.size()-1;
+  while(i >=0 && j>=0 && ntrp1.get(i) == ntrp2.get(j))
+  {
+   
+    i--;
+    j--;
 
+  }
+   return i+j+2;
+   
+}
 public static void main(String[] args)
 {
         //Integer[] arr = {10,20,null,30,50,null,60,null,null,40,null,null};
@@ -368,7 +383,8 @@ public static void main(String[] args)
        // Integer[] arr = {10,20,null,30,100,null,null,40,50,null,60,null,null,70,null,80,null,null};
         //System.out.println("BEFORE: ");
         Node root = construct(arr);
-        System.out.println("lca : "+lca(root,60,90));
+        System.out.println()
+       // System.out.println("lca : "+lca(root,60,90));
 
         // ArrayList<Integer> rres = NodeToRootPath(root,80);
         // for(Integer num : rres)
