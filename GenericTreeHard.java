@@ -383,7 +383,7 @@ public static void main(String[] args)
        // Integer[] arr = {10,20,null,30,100,null,null,40,50,null,60,null,null,70,null,80,null,null};
         //System.out.println("BEFORE: ");
         Node root = construct(arr);
-        System.out.println()
+        System.out.println(distanceBetweenNodes(root,70,120));
        // System.out.println("lca : "+lca(root,60,90));
 
         // ArrayList<Integer> rres = NodeToRootPath(root,80);
