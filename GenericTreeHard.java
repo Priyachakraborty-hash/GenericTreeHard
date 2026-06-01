@@ -397,7 +397,7 @@ public static boolean isMirror(Node n1,Node n2)
 
 }
 
-//...
+//....
 public static void main(String[] args)
 {
         //Integer[] arr = {10,20,null,30,50,null,60,null,null,40,null,null};
