@@ -376,17 +376,42 @@ public static int distanceBetweenNodes(Node node , int d1,int d2)
    return i+j+2;
    
 }
+public static boolean isMirror(Node n1,Node n2)
+{
+   if(n1.children.size() != n2.children.size())
+   {
+       return false;
+
+   }
+   boolean res = true;
+   int sz = n1.children.size();
+   for(int i=0;i<sz;i++)
+   {
+    Node child1 = n1.children.get(i);
+    Node child2 = n2.children.get(sz - i - 1);
+    res = isMirror(child1,child2);
+    if(res == false) return false;
+   }
+
+   return res;
+
+}
+
+//...
 public static void main(String[] args)
 {
         //Integer[] arr = {10,20,null,30,50,null,60,null,null,40,null,null};
        Integer[] arr = {10,20,50,null,60,null,null,30,70,null,80,110,null,120,null,null,90,null,null,40,100,null,null,null};
+       //Integer[] arr1 = {10,20,50,null,60,null,null,30,70,null,80,110,null,120,null,null,90,null,null,40,100,null,null,null};
+       Integer[] arr2 = {10,40,100,null,null,30,90,null,80,120,null,110,null,null,70,null,null,20,60,null,50,null,null,null};
        // Integer[] arr = {10,20,null,30,100,null,null,40,50,null,60,null,null,70,null,80,null,null};
         //System.out.println("BEFORE: ");
         Node root = construct(arr);
-        System.out.println(distanceBetweenNodes(root,70,120));
+        Node root2 = construct(arr2);
+        System.out.println(isMirror(root,root2));
+       // System.out.println(distanceBetweenNodes(root,70,120));
        // System.out.println("lca : "+lca(root,60,90));
-
-        // ArrayList<Integer> rres = NodeToRootPath(root,80);
+      // ArrayList<Integer> rres = NodeToRootPath(root,80);
         // for(Integer num : rres)
         // {
         //    System.out.print(num + ",");       
