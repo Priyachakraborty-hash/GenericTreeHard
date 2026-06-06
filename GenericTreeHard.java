@@ -378,11 +378,8 @@ public static int distanceBetweenNodes(Node node , int d1,int d2)
 }
 public static boolean isMirror(Node n1,Node n2)
 {
-   if(n1.children.size() != n2.children.size())
-   {
-       return false;
-
-   }
+   // mirror means having same children left side nad for other node the right side and so on....
+   if(n1.children.size() != n2.children.size())return false;
    boolean res = true;
    int sz = n1.children.size();
    for(int i=0;i<sz;i++)
@@ -396,19 +393,76 @@ public static boolean isMirror(Node n1,Node n2)
    return res;
 
 }
+public static boolean symmetric(Node n1,Node n2)
+{
+    // so W is symmetric and mirror but B is not.
+   boolean res = isMirror(n1,n2);
+   return res;
+
+}
+
+public static Node predecessor;
+public static Node successor;
+public static int state = 0;
+
+public static void predcessorAndSuccessor(Node node, int data)
+{
+      if(state==0)
+      {
+         if(node.data == data)
+         {
+              state++;
+         }
+         else
+         {
+            predecessor = node;
+         }
+
+      }
+      else if( state == 1)
+      {
+        successor = node;
+        state++;
+        return;
+      }
+for(Node child : node.children)
+{
+ 
+ if(state < 2)
+ {
+    predcessorAndSuccessor(child,data);
+ }
+ else
+ {
+   return;
+ }
+}
+
+}
 
 //....
 public static void main(String[] args)
 {
+
+   
         //Integer[] arr = {10,20,null,30,50,null,60,null,null,40,null,null};
        Integer[] arr = {10,20,50,null,60,null,null,30,70,null,80,110,null,120,null,null,90,null,null,40,100,null,null,null};
        //Integer[] arr1 = {10,20,50,null,60,null,null,30,70,null,80,110,null,120,null,null,90,null,null,40,100,null,null,null};
-       Integer[] arr2 = {10,40,100,null,null,30,90,null,80,120,null,110,null,null,70,null,null,20,60,null,50,null,null,null};
+       //Integer[] arr2 = {10,40,100,null,null,30,90,null,80,120,null,110,null,null,70,null,null,20,60,null,50,null,null,null};
        // Integer[] arr = {10,20,null,30,100,null,null,40,50,null,60,null,null,70,null,80,null,null};
-        //System.out.println("BEFORE: ");
+       //Integer[] arr = {10,20,50,null,60,null,null,30,70,null,90,null,80,null,null,40,100,null,120,null,null,null};
+       // System.out.println("BEFORE: ");
         Node root = construct(arr);
-        Node root2 = construct(arr2);
-        System.out.println(isMirror(root,root2));
+        predcessorAndSuccessor(root,70);
+        System.out.println("pre:" + predecessor.data);
+        System.out.println("succ: "+successor.data);
+
+        //Node root2 = construct(arr2);
+        //System.out.println(isMirror(root,root2));
+       
+       // System.out.println(symmetric(root,root));
+    
+
        // System.out.println(distanceBetweenNodes(root,70,120));
        // System.out.println("lca : "+lca(root,60,90));
       // ArrayList<Integer> rres = NodeToRootPath(root,80);
