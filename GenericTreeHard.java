@@ -404,9 +404,13 @@ public static boolean symmetric(Node n1,Node n2)
 public static Node predecessor;
 public static Node successor;
 public static int state = 0;
-
 public static void predcessorAndSuccessor(Node node, int data)
 {
+     //successor hota hai node ke thik baad wala node
+     //predecessor hota hai ekdum node ke pehle wala node
+     //its a travel and change strategy.travel kar rhe hai har ek node psr fir change kar rh he pred. ko
+     // usker bad state change kar rhe hai aur change kar rhe hai success ko
+
       if(state==0)
       {
          if(node.data == data)
@@ -439,12 +443,31 @@ for(Node child : node.children)
 }
 
 }
+ 
+public static int ceil  = Integer.MAX_VALUE;  // known as qualified or strict min
+public static int floor = Integer.MIN_VALUE; // known as qualified or strict max
+public static void ceilAndFloor(Node node,int data)
+{
+     if(node.data > data)
+     {
+           if(node.data < ceil) ceil = node.data;  
+     }
+     if(node.data < data)
+     {
+         if(node.data > floor) floor = node.data;  
+     }
+     
+for(Node child : node.children)
+{
+     ceilAndFloor(child,data);
+}
+}
 
 //....
 public static void main(String[] args)
 {
 
-   
+
         //Integer[] arr = {10,20,null,30,50,null,60,null,null,40,null,null};
        Integer[] arr = {10,20,50,null,60,null,null,30,70,null,80,110,null,120,null,null,90,null,null,40,100,null,null,null};
        //Integer[] arr1 = {10,20,50,null,60,null,null,30,70,null,80,110,null,120,null,null,90,null,null,40,100,null,null,null};
@@ -453,17 +476,18 @@ public static void main(String[] args)
        //Integer[] arr = {10,20,50,null,60,null,null,30,70,null,90,null,80,null,null,40,100,null,120,null,null,null};
        // System.out.println("BEFORE: ");
         Node root = construct(arr);
-        predcessorAndSuccessor(root,70);
-        System.out.println("pre:" + predecessor.data);
-        System.out.println("succ: "+successor.data);
+        ceilAndFloor(root,80);
+        System.out.println("ceil:" + ceil);
+        System.out.println("floor: "+floor);
+
+       // predcessorAndSuccessor(root,70);
+       // System.out.println("pre:" + predecessor.data);
+       // System.out.println("succ: "+successor.data);
 
         //Node root2 = construct(arr2);
         //System.out.println(isMirror(root,root2));
-       
        // System.out.println(symmetric(root,root));
-    
-
-       // System.out.println(distanceBetweenNodes(root,70,120));
+      // System.out.println(distanceBetweenNodes(root,70,120));
        // System.out.println("lca : "+lca(root,60,90));
       // ArrayList<Integer> rres = NodeToRootPath(root,80);
         // for(Integer num : rres)
